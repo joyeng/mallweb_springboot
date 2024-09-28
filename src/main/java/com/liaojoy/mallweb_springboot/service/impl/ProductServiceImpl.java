@@ -1,6 +1,7 @@
 package com.liaojoy.mallweb_springboot.service.impl;
 
 import com.liaojoy.mallweb_springboot.dao.ProductDao;
+import com.liaojoy.mallweb_springboot.dto.ProductRequest;
 import com.liaojoy.mallweb_springboot.model.Product;
 import com.liaojoy.mallweb_springboot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,5 +16,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(Integer productId) {
         return productDao.getProductById(productId);
+    }
+
+    @Override
+    public Integer createProduct(ProductRequest productRequest) {
+        return productDao.createProduct(productRequest);
     }
 }
