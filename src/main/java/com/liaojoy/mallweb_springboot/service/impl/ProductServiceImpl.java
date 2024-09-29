@@ -1,5 +1,6 @@
 package com.liaojoy.mallweb_springboot.service.impl;
 
+import com.liaojoy.mallweb_springboot.constant.ProductCategory;
 import com.liaojoy.mallweb_springboot.dao.ProductDao;
 import com.liaojoy.mallweb_springboot.dto.ProductRequest;
 import com.liaojoy.mallweb_springboot.model.Product;
@@ -16,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts() {
-        return productDao.getProducts();
+    public List<Product> getProducts(ProductCategory category, String search) {
+        return productDao.getProducts(category, search);
     }
 
     @Override

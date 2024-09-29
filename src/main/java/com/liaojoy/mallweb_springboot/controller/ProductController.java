@@ -1,5 +1,6 @@
 package com.liaojoy.mallweb_springboot.controller;
 
+import com.liaojoy.mallweb_springboot.constant.ProductCategory;
 import com.liaojoy.mallweb_springboot.dto.ProductRequest;
 import com.liaojoy.mallweb_springboot.model.Product;
 import com.liaojoy.mallweb_springboot.service.ProductService;
@@ -18,8 +19,11 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts() {
-        List<Product> productList = productService.getProducts();
+    public ResponseEntity<List<Product>> getProducts(
+            @RequestParam(required = false) ProductCategory category,
+            @RequestParam(required = false) String search
+            ) {
+        List<Product> productList = productService.getProducts(category, search);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
