@@ -1,6 +1,7 @@
 package com.liaojoy.mallweb_springboot.controller;
 
 import com.liaojoy.mallweb_springboot.constant.ProductCategory;
+import com.liaojoy.mallweb_springboot.dto.ProductQueryParams;
 import com.liaojoy.mallweb_springboot.dto.ProductRequest;
 import com.liaojoy.mallweb_springboot.model.Product;
 import com.liaojoy.mallweb_springboot.service.ProductService;
@@ -23,7 +24,12 @@ public class ProductController {
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
             ) {
-        List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
