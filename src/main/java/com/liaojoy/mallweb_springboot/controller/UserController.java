@@ -1,5 +1,6 @@
 package com.liaojoy.mallweb_springboot.controller;
 
+import com.liaojoy.mallweb_springboot.dto.UserLoginRequest;
 import com.liaojoy.mallweb_springboot.dto.UserRegisterRequest;
 import com.liaojoy.mallweb_springboot.model.User;
 import com.liaojoy.mallweb_springboot.service.UserService;
@@ -27,5 +28,12 @@ public class UserController {
 
         //將數據回傳給前端
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PostMapping("/users/login")
+    public ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
+        User user = userService.login(userLoginRequest);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }
