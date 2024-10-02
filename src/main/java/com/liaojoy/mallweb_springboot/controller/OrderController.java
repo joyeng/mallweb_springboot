@@ -1,6 +1,7 @@
 package com.liaojoy.mallweb_springboot.controller;
 
 import com.liaojoy.mallweb_springboot.dto.CreateOrderRequest;
+import com.liaojoy.mallweb_springboot.model.Order;
 import com.liaojoy.mallweb_springboot.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class OrderController {
 
         Integer orderId = orderService.createOrder(userId, createOrderRequest);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
+        Order order = orderService.getOrderById(orderId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
 }
