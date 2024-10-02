@@ -1,12 +1,17 @@
 package com.liaojoy.mallweb_springboot.dao;
 
 import com.liaojoy.mallweb_springboot.dto.CreateOrderRequest;
+import com.liaojoy.mallweb_springboot.dto.OrderQueryParams;
 import com.liaojoy.mallweb_springboot.model.Order;
 import com.liaojoy.mallweb_springboot.model.OrderItem;
 
 import java.util.List;
 
 public interface OrderDao {
+
+    Integer countOrder(OrderQueryParams orderQueryParams);
+
+    List<Order> getOrders(OrderQueryParams orderQueryParams);
 
     Order getOrderById(Integer orderId);
 

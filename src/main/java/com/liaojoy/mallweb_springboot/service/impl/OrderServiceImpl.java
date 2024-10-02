@@ -5,6 +5,7 @@ import com.liaojoy.mallweb_springboot.dao.ProductDao;
 import com.liaojoy.mallweb_springboot.dao.UserDao;
 import com.liaojoy.mallweb_springboot.dto.BuyItem;
 import com.liaojoy.mallweb_springboot.dto.CreateOrderRequest;
+import com.liaojoy.mallweb_springboot.dto.OrderQueryParams;
 import com.liaojoy.mallweb_springboot.model.Order;
 import com.liaojoy.mallweb_springboot.model.OrderItem;
 import com.liaojoy.mallweb_springboot.model.Product;
@@ -34,6 +35,25 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private UserDao userDao;
+
+    @Override
+    public Integer countOrder(OrderQueryParams orderQueryParams) {
+        return orderDao.countOrder(orderQueryParams);
+    }
+
+    @Override
+    public List<Order> getOrders(OrderQueryParams orderQueryParams) {
+        // 找出符合條件的一批訂單出來
+        List<Order> orderList = orderDao.getOrders(orderQueryParams);
+
+        for (Order order : orderList) {
+            List<OrderItem> orderItemList = orderDao.getOrderItemsByOrderId(order.getOrderId());
+
+            order.setOrderItemList(orderItemList);
+        }
+
+        return orderList;
+    }
 
     @Override
     public Order getOrderById(Integer orderId) {
